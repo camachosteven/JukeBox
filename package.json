@@ -1,0 +1,19 @@
+{
+  "name": "hakusports-jukebox",
+  "version": "1.0.0",
+  "description": "This is a JukeBox created to Haku Sports' specs. ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "connect-livereload": "^0.6.1",
+    "dotenv": "^10.0.0",
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "livereload": "^0.9.3"
+  }
+}
