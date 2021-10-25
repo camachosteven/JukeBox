@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Haku Sports JukeBox</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <h1 class="project__title">Haku Sports JukeBox</h1>
+
+    <section class="albums__visual">
+        <% for (let i = 0; i < allAlbums.length; i++) { %>
+        <div class="albums__individual albums__individual-<%= i + 1 %>" 
+            data-songs="<%= allSongLists[i] %>">
+            <img src="<%= allAlbums[i].cover_photo_url%>" alt="<%= allAlbums[i].name %>">
+            <p class="album__name"><%= allAlbums[i].name %></p>
+            <p class="artist__name"><%= allAlbums[i].artist_name %></p>
+        </div>
+        <% } %>
+        <!-- <div class="albums__individual albums__individual-1" data-songs="">
+            <img src="/img/sample-album.png" alt="Sample Album">
+            <p class="album__name">IT IS TOO LATE</p>
+            <P class="artist__name">Drake</P>
+        </div>
+        <div class="albums__individual albums__individual-2">
+            <img src="/img/sample-album.png" alt="Sample Album">
+            <p class="album__name">IT IS TOO LATE</p>
+            <P class="artist__name">Drake</P>
+        </div>
+        <div class="albums__individual albums__individual--selected albums__individual-3">
+            <img src="/img/sample-album.png" alt="Sample Album">
+            <p class="album__name">IT IS TOO LATE</p>
+            <P class="artist__name">Drake</P>
+        </div><div class="albums__individual albums__individual-4">
+            <img src="/img/sample-album.png" alt="Sample Album">
+            <p class="album__name">IT IS TOO LATE</p>
+            <P class="artist__name">Drake</P>
+        </div><div class="albums__individual albums__individual-5">
+            <img src="/img/sample-album.png" alt="Sample Album">
+            <p class="album__name">IT IS TOO LATE</p>
+            <P class="artist__name">Drake</P>
+        </div> -->
+    </section>
+<!--     
+    <section class="lower-body__container">
+        <div class="album__select--arrows album__select--arrows-left">
+            <img src="/img/arrow.svg" alt="Left Arrow">
+        </div>
+        <div class="album__selected--songlist">
+            <ul>
+                <li class="songlist__individual">
+                    <div class="album__track--number">
+                        <span>1</span>
+                    </div>
+                    <img class="song__favorite--select" src="/img/favorite-star.svg" alt="Favorites">
+                    <p class="album__song--name">Song Name</p>
+                    <div class="album__song--categories">
+                        <span>Category 1</span>
+                        <span>Category 2</span>
+                    </div>
+                    <p class="album__song--time">1:00</p>
+                </li>
+                <li class="songlist__individual">2. * Hello Explicit 1:00</li>
+                <li class="songlist__individual">3. * Hello Explicit 1:00</li>
+                <li class="songlist__individual">4. * Hello Explicit 1:00</li>
+                <li class="songlist__individual">5. * Hello Explicit 1:00</li>
+            </ul>
+        </div>
+        <div class="album__select--arrows album__select--arrows-right">
+            <img src="/img/arrow.svg" alt="Right Arrow">
+        </div>
+    </section> -->
+    <script src="/js/index.js"></script>
+</body>
+</html>
