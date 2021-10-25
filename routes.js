@@ -14,7 +14,7 @@ router.get('/', (req, res) => {
     const APIData = {};
     axios({
         method: 'get',
-        url: 'https://stg-resque.hakuapp.com/albums.json'
+        url: 'https://stg-resque.hakuapp.com/'
     })
     .then(allAlbumsResponse => {
         APIData.allAlbums = allAlbumsResponse.data;
@@ -56,35 +56,35 @@ const returnSampleData = () => {
             {
                 id: 1,
                 name: "IT IS TOO LATE",
-                artist__name: 'Drake',
+                artist_name: 'Drake',
                 cover_photo_url: '/img/sample-album.png'
             },
             {
                 id: 2,
                 name: "IT IS TOO LATE",
-                artist__name: 'Drake',
+                artist_name: 'Drake',
                 cover_photo_url: '/img/sample-album.png'
             },
             {
                 id: 3,
                 name: "IT IS TOO LATE",
-                artist__name: 'Drake',
+                artist_name: 'Drake',
                 cover_photo_url: '/img/sample-album.png'
             },{
                 id: 4,
                 name: "IT IS TOO LATE",
-                artist__name: 'Drake',
+                artist_name: 'Drake',
                 cover_photo_url: '/img/sample-album.png'
             },
             {
                 id: 5,
                 name: "IT IS TOO LATE",
-                artist__name: 'Drake',
+                artist_name: 'Drake',
                 cover_photo_url: '/img/sample-album.png'
             }
         ],
         allSongLists: [
-            [
+            JSON.stringify([
                 {
                 id: 1,
                 album_id: 1,
@@ -104,8 +104,8 @@ const returnSampleData = () => {
                         'explicit'
                     ]
                 }
-            ],
-            [
+            ]),
+            JSON.stringify([
                 {
                 id: 1,
                 album_id: 2,
@@ -125,8 +125,8 @@ const returnSampleData = () => {
                         'upbeat'
                     ]
                 }
-            ],
-            [
+            ]),
+            JSON.stringify([
                 {
                 id: 1,
                 album_id: 3,
@@ -147,8 +147,8 @@ const returnSampleData = () => {
                         'upbeat'
                     ]
                 }
-            ],
-            [
+            ]),
+            JSON.stringify([
                 {
                 id: 1,
                 album_id: 4,
@@ -166,8 +166,8 @@ const returnSampleData = () => {
                     song_order: 2,
                     song_label: []
                 }
-            ],
-            [
+            ]),
+            JSON.stringify([
                 {
                 id: 1,
                 album_id: 5,
@@ -188,8 +188,7 @@ const returnSampleData = () => {
                         'upbeat'
                     ]
                 }
-            ]
-
+            ])
         ]
     }
 };
