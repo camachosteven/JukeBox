@@ -83,17 +83,23 @@ Albums carousel
     display: flex;
     justify-content: center;
     padding: 0 1rem;
-    margin-top: 5rem;
+    margin-top: 6rem;
 }
 
 .album__selected--songlist {
-    padding: 0;
     flex-grow: 0.5;
     list-style: none;
+    box-shadow: 0 0 10px 3px #dddddd;
+}
+
+.album__selected--songlist ul {
+    padding: 0;
+    margin: 0;
 }
 
 .songlist__individual {
     display: flex;
+    position: relative;
     align-items: center;
     justify-content: space-between;
     padding: 0.25rem 1rem;
@@ -103,6 +109,7 @@ Albums carousel
     font-size: 1.25rem;
     font-weight: bolder;
     letter-spacing: 0.05rem;
+    transition: background-color 0.5s, color 0.5s;
 }
 
 .songlist__individual--hover {
@@ -127,6 +134,37 @@ Albums carousel
     border-radius: 0.1rem;
 }
 
+.song__favorite--popup {
+    height: 0;
+    opacity: 0;
+    font-size: 0.8rem;
+    font-weight: normal;
+    color: white;
+    background-color: #BBBBBB;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    position: absolute;
+    top: -1.25rem;
+    left: 4rem;
+    transition: opacity 0.5s;
+}
+
+.song__favorite--popup-hover {
+    height: auto;
+    opacity: 1;
+}
+
+.song__favorite--popup::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 20%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #BBBBBB transparent transparent transparent;
+}
+
 .song__favorite--select {
     height: 30px;
     width: 30px;
@@ -134,7 +172,8 @@ Albums carousel
 }
 
 .song__favorite--selected {
-    filter: invert(86%) sepia(91%) saturate(7468%) hue-rotate(359deg) brightness(83%) contrast(109%);;
+    filter: invert(86%) sepia(91%) saturate(7468%) 
+    hue-rotate(359deg) brightness(83%) contrast(109%) !important;
 }
 
 .song__favorite--select-hover {
@@ -162,6 +201,8 @@ Albums carousel
 
 .album__song--time {
     color: black;
+    position: relative;
+    right: 3rem;
 }
 
 .album__song--time-hover {

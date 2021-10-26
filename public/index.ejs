@@ -17,7 +17,7 @@
     <section class="albums__visual">
         <% for (let i = 0; i < allAlbums.length; i++) { %>
         <div class="albums__individual albums__individual-<%= i + 1 %>" 
-            data-songs="<%= allSongLists[i] %>">
+            data-songs="<%= allSongLists[i] %>" data-albumID="<%= allAlbums[i].id %>">
             <img src="<%= allAlbums[i].cover_photo_url%>" alt="<%= allAlbums[i].name %>">
             <p class="album__name"><%= allAlbums[i].name %></p>
             <p class="artist__name"><%= allAlbums[i].artist_name %></p>
@@ -38,6 +38,7 @@
                             <span><%= nextSong.song_order %></span>
                         </div>
                         <img class="song__favorite--select" src="/img/favorite-star.svg" alt="Favorites">
+                        <p class="song__favorite--popup">MARK AS FAVORITE</p>
                         <p class="album__song--name"><%= nextSong.song_name.toUpperCase() %></p>
                         <% if (nextSong.song_label.length > 0) { %>
                         <div class="album__song--categories">
