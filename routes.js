@@ -14,24 +14,38 @@ router.get('/', (req, res) => {
     const APIData = {};
     axios({
         method: 'get',
-        url: 'https://stg-resque.hakuapp.com/'
+        url: 'https://stg-resque.hakuapp.com/albums.json'
     })
     .then(allAlbumsResponse => {
-        APIData.allAlbums = allAlbumsResponse.data;
+        APIData.allAlbums = shuffleAlbums(allAlbumsResponse.data);
         return Promise.all(APIData.allAlbums.map(element => getSongs(element.id)));
     })
     .then(allSongListResponses => {
         const allSongLists = [];
         for (songListResponse of allSongListResponses) {
-            allSongLists.push(JSON.stringify(songListResponse.data));
+            const sortedSonglist = songListResponse.data.sort((song1, song2) => {
+                return song1.song_order - song2.song_order;
+            });
+            allSongLists.push(JSON.stringify(sortedSonglist));
         }
         APIData.allSongLists = allSongLists;
         res.render('index', APIData);
     })
     .catch(error => {
+        console.log(error);
         res.render('index', returnSampleData());
     });
 });
+
+const shuffleAlbums = albums => {
+    for (let i = 0; i < albums.length; i++) {
+        let randomNumber = Math.floor(Math.random() * albums.length);
+        const temp = albums[i];
+        albums[i] = albums[randomNumber];
+        albums[randomNumber] = temp;
+    }
+    return albums
+};
 
 /**
  * This method is used by the array.map function.

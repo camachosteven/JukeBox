@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Haku Sports JukeBox</title>
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/glide.core.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
@@ -19,8 +20,8 @@
         <div class="albums__individual albums__individual-<%= i + 1 %>" 
             data-songs="<%= allSongLists[i] %>" data-albumID="<%= allAlbums[i].id %>">
             <img src="<%= allAlbums[i].cover_photo_url%>" alt="<%= allAlbums[i].name %>">
-            <p class="album__name"><%= allAlbums[i].name %></p>
-            <p class="artist__name"><%= allAlbums[i].artist_name %></p>
+            <p class="album__name"><%= allAlbums[i].name.toUpperCase() %></p>
+            <p class="artist__name"><%= allAlbums[i].artist_name.toUpperCase() %></p>
         </div>
         <% } %>
     </section>
@@ -28,11 +29,10 @@
     <section class="lower-body__container">
         <div class="album__selected--songlist">
             <ul>
-                <% const mainAlbumIndex = 3; %>
+                <% const mainAlbumIndex = 2; %>
                 <% const mainSongList = JSON.parse(allSongLists[mainAlbumIndex]); %>
-                <% mainSongList.sort((element1, element2) => element1.song_order - element2.song_order); %>
                 <% for (nextSong of mainSongList) { %>
-                <li class="songlist__individual">
+                <li class="songlist__individual" data-songID="<%= nextSong.id %>>">
                     <div>
                         <div class="album__track--number">
                             <span><%= nextSong.song_order %></span>
@@ -40,6 +40,7 @@
                         <img class="song__favorite--select" src="/img/favorite-star.svg" alt="Favorites">
                         <p class="song__favorite--popup">MARK AS FAVORITE</p>
                         <p class="album__song--name"><%= nextSong.song_name.toUpperCase() %></p>
+                        <% if (nextSong['song_label'] != null) { %>
                         <% if (nextSong.song_label.length > 0) { %>
                         <div class="album__song--categories">
                             <% if (nextSong.song_label.includes('explicit')) { %>
@@ -50,6 +51,7 @@
                             <% } %>
                         </div>
                         <% } %>
+                        <% } %>
                     </div>
                     <p class="album__song--time"><%= nextSong.song_duration %></p>
                 </li>
@@ -57,6 +59,7 @@
             </ul>
         </div>
     </section>
+    <script src="/js/glide.min.js"></script>
     <script src="/js/index.js"></script>
 </body>
 </html>
