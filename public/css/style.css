@@ -37,7 +37,7 @@ Albums carousel
     text-align: center;
 }
 
-.albums__individual-1 {
+/* .albums__individual-1 {
     position: relative;
     z-index: 0;
     left: 10rem;
@@ -69,12 +69,12 @@ Albums carousel
     position: relative;
     z-index: 0;
     right: 10rem;
-}
-
+} */
+/* 
 .albums__individual-3 .album__name,
 .albums__individual-3 .artist__name {
     color: white;
-}
+} */
 
 
 

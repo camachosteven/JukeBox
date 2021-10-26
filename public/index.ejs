@@ -7,6 +7,7 @@
     <title>Haku Sports JukeBox</title>
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/glide.core.min.css">
+    <link rel="stylesheet" href="/css/glide.theme.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
@@ -14,52 +15,57 @@
 </head>
 <body>
     <h1 class="project__title">Haku Sports JukeBox</h1>
-
-    <section class="albums__visual">
-        <% for (let i = 0; i < allAlbums.length; i++) { %>
-        <div class="albums__individual albums__individual-<%= i + 1 %>" 
-            data-songs="<%= allSongLists[i] %>" data-albumID="<%= allAlbums[i].id %>">
-            <img src="<%= allAlbums[i].cover_photo_url%>" alt="<%= allAlbums[i].name %>">
-            <p class="album__name"><%= allAlbums[i].name.toUpperCase() %></p>
-            <p class="artist__name"><%= allAlbums[i].artist_name.toUpperCase() %></p>
-        </div>
-        <% } %>
-    </section>
     
-    <section class="lower-body__container">
-        <div class="album__selected--songlist">
-            <ul>
-                <% const mainAlbumIndex = 2; %>
-                <% const mainSongList = JSON.parse(allSongLists[mainAlbumIndex]); %>
-                <% for (nextSong of mainSongList) { %>
-                <li class="songlist__individual" data-songID="<%= nextSong.id %>>">
-                    <div>
-                        <div class="album__track--number">
-                            <span><%= nextSong.song_order %></span>
-                        </div>
-                        <img class="song__favorite--select" src="/img/favorite-star.svg" alt="Favorites">
-                        <p class="song__favorite--popup">MARK AS FAVORITE</p>
-                        <p class="album__song--name"><%= nextSong.song_name.toUpperCase() %></p>
-                        <% if (nextSong['song_label'] != null) { %>
-                        <% if (nextSong.song_label.length > 0) { %>
-                        <div class="album__song--categories">
-                            <% if (nextSong.song_label.includes('explicit')) { %>
-                            <span>EXPLICIT</span>
-                            <% } %>
-                            <% if (nextSong.song_label.includes('upbeat')) { %>
-                            <span>UPBEAT</span>
-                            <% } %>
-                        </div>
-                        <% } %>
-                        <% } %>
-                    </div>
-                    <p class="album__song--time"><%= nextSong.song_duration %></p>
-                </li>
-                <% } %>
+    <div class="glide">
+        <div class="glide__track" data-glide-el="track">
+            <div class="glide__slides albums__visual">
+                <div class="glide__slide albums__individual albums__individual-1">
+                    <img src="/img/sample-album.png" alt="sample-album">
+                    <p class="album__name">IT IS TOO LATE</p>
+                    <p class="artist__name">DRAKE</p>                    
+                </div>
+                <div class="glide__slide albums__individual albums__individual-2">
+                    <img src="/img/sample-album2.jpg" alt="sample-album">
+                    <p class="album__name">IT IS TOO LATE</p>
+                    <p class="artist__name">DRAKE</p>                    
+                </div>
+                <div class="glide__slide albums__individual albums__individual-3">
+                    <img src="/img/sample-album3.jpg" alt="sample-album">
+            
+                    <p class="album__name">IT IS TOO LATE</p>
+                    <p class="artist__name">DRAKE</p>
+                </div>
+                <div class="glide__slide albums__individual albums__individual-4">
+                    <img src="/img/sample-album4.jpg" alt="sample-album">
+            
+                    <p class="album__name">IT IS TOO LATE</p>
+                    <p class="artist__name">DRAKE</p>
+                </div>
+                <div class="glide__slide albums__individual albums__individual-5">
+                    <img src="/img/sample-album5.jpg" alt="sample-album">
+                    <p class="album__name">IT IS TOO LATE</p>
+                    <p class="artist__name">DRAKE</p>                    
+                </div>
             </ul>
         </div>
-    </section>
+        <div class="glide__arrows" data-glide-el="controls">
+            <button class="glide__arrow glide__arrow--left" data-glide-dir="<">
+                <img src="/img/arrow-left.svg" alt="Left">
+            </button>
+            <button class="glide__arrow glide__arrow--right" data-glide-dir=">">
+                <img src="/img/arrow-right.svg" alt="right">
+            </button>
+        </div>
+    </div>
+    
     <script src="/js/glide.min.js"></script>
-    <script src="/js/index.js"></script>
+    <script>
+        new Glide('.glide', {
+            type: 'carousel',
+            startAt: 0,
+            perView: 5,
+            focusAt: 'center'
+        }).mount();
+    </script>
 </body>
 </html>
