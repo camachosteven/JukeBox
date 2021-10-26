@@ -54,7 +54,7 @@ Albums carousel
     position: relative;
     z-index: 10;
     top: 6rem;
-    background-color: #00698C;
+    background-color: #0085B2;
     box-shadow: none;
 }
 
@@ -81,20 +81,89 @@ Albums carousel
 /* Songlist */ 
 .lower-body__container {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     padding: 0 1rem;
+    margin-top: 5rem;
 }
 
-.album__selected--songlist ul {
+.album__selected--songlist {
     padding: 0;
+    flex-grow: 0.5;
     list-style: none;
 }
 
-.album__select--arrows {
-    padding-top: 1rem;    
-    border: 1px solid black;
+.songlist__individual {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.25rem 1rem;
+    background-color: #f3f6f7;
+    border-bottom: 2px solid #dfe1e2;
+    color: #0085B2;
+    font-size: 1.25rem;
+    font-weight: bolder;
+    letter-spacing: 0.05rem;
 }
 
-.album__select--arrows-right img {
-    transform: rotate(0.5turn); 
+.songlist__individual--hover {
+    background-color: #0085B2;
+}
+
+.songlist__individual > div {
+    display: flex;
+    align-items: center;
+}
+
+.songlist__individual > div > * {
+    margin: 0 1rem;
+}
+
+.album__track--number {
+    padding: 0.25rem 0.5rem;
+    background-color: #90B9C9;
+    color: white;
+    font-size: 1rem;
+    font-weight: normal;
+    border-radius: 0.1rem;
+}
+
+.song__favorite--select {
+    height: 30px;
+    width: 30px;
+    filter: invert(77%) sepia(62%) saturate(0%) hue-rotate(28deg) brightness(102%) contrast(99%);
+}
+
+.song__favorite--selected {
+    filter: invert(86%) sepia(91%) saturate(7468%) hue-rotate(359deg) brightness(83%) contrast(109%);;
+}
+
+.song__favorite--select-hover {
+    filter: invert(99%) sepia(0%) saturate(0%) hue-rotate(84deg) brightness(107%) contrast(101%);
+}
+
+.album__song--name-hover {
+    color: white;
+}
+
+.album__song--categories span {
+    display: inline-block;
+    padding: 0.5rem 1.5rem;
+    margin-right: 0.5rem;
+    color: black;
+    font-size: 1rem;
+    background-color: #DDDDDD;
+    letter-spacing: 0.05rem;
+}
+
+.songlist__individual .album__song--categories-hover {
+    color: white;
+    background-color: #90B9C9;
+}
+
+.album__song--time {
+    color: black;
+}
+
+.album__song--time-hover {
+    color: white;
 }

@@ -29,7 +29,6 @@ router.get('/', (req, res) => {
         res.render('index', APIData);
     })
     .catch(error => {
-        console.log(error);
         res.render('index', returnSampleData());
     });
 });
@@ -93,7 +92,8 @@ const returnSampleData = () => {
                 song_label: [
                     'explicit',
                     'upbeat'
-                    ]
+                    ],
+                song_duration: '3:46'
                 },
                 {
                     id: 2,
@@ -102,7 +102,8 @@ const returnSampleData = () => {
                     song_order: 2,
                     song_label: [
                         'explicit'
-                    ]
+                    ],
+                    song_duration: '3:46'
                 }
             ]),
             JSON.stringify([
@@ -114,7 +115,8 @@ const returnSampleData = () => {
                 song_label: [
                     'explicit',
                     'upbeat'
-                    ]
+                    ],
+                song_duration: '3:46'
                 },
                 {
                     id: 2,
@@ -123,7 +125,8 @@ const returnSampleData = () => {
                     song_order: 2,
                     song_label: [
                         'upbeat'
-                    ]
+                    ],
+                    song_duration: '3:46'
                 }
             ]),
             JSON.stringify([
@@ -135,7 +138,8 @@ const returnSampleData = () => {
                 song_label: [
                     'explicit',
                     'upbeat'
-                    ]
+                    ],
+                song_duration: '3:46'
                 },
                 {
                     id: 2,
@@ -145,7 +149,8 @@ const returnSampleData = () => {
                     song_label: [
                         'explicit',
                         'upbeat'
-                    ]
+                    ],
+                    song_duration: '3:46'
                 }
             ]),
             JSON.stringify([
@@ -157,14 +162,16 @@ const returnSampleData = () => {
                 song_label: [
                     'explicit',
                     'upbeat'
-                    ]
+                    ],
+                song_duration: '3:46'
                 },
                 {
                     id: 2,
                     album_id: 4,
                     song_name: "God's Plan",
                     song_order: 2,
-                    song_label: []
+                    song_label: [],
+                    song_duration: '3:46'
                 }
             ]),
             JSON.stringify([
@@ -176,7 +183,8 @@ const returnSampleData = () => {
                 song_label: [
                     'explicit',
                     'upbeat'
-                    ]
+                    ],
+                song_duration: '3:46'
                 },
                 {
                     id: 2,
@@ -186,7 +194,8 @@ const returnSampleData = () => {
                     song_label: [
                         'explicit',
                         'upbeat'
-                    ]
+                    ],
+                    song_duration: '3:46'
                 }
             ])
         ]

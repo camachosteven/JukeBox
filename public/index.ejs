@@ -23,59 +23,39 @@
             <p class="artist__name"><%= allAlbums[i].artist_name %></p>
         </div>
         <% } %>
-        <!-- <div class="albums__individual albums__individual-1" data-songs="">
-            <img src="/img/sample-album.png" alt="Sample Album">
-            <p class="album__name">IT IS TOO LATE</p>
-            <P class="artist__name">Drake</P>
-        </div>
-        <div class="albums__individual albums__individual-2">
-            <img src="/img/sample-album.png" alt="Sample Album">
-            <p class="album__name">IT IS TOO LATE</p>
-            <P class="artist__name">Drake</P>
-        </div>
-        <div class="albums__individual albums__individual--selected albums__individual-3">
-            <img src="/img/sample-album.png" alt="Sample Album">
-            <p class="album__name">IT IS TOO LATE</p>
-            <P class="artist__name">Drake</P>
-        </div><div class="albums__individual albums__individual-4">
-            <img src="/img/sample-album.png" alt="Sample Album">
-            <p class="album__name">IT IS TOO LATE</p>
-            <P class="artist__name">Drake</P>
-        </div><div class="albums__individual albums__individual-5">
-            <img src="/img/sample-album.png" alt="Sample Album">
-            <p class="album__name">IT IS TOO LATE</p>
-            <P class="artist__name">Drake</P>
-        </div> -->
     </section>
-<!--     
+    
     <section class="lower-body__container">
-        <div class="album__select--arrows album__select--arrows-left">
-            <img src="/img/arrow.svg" alt="Left Arrow">
-        </div>
         <div class="album__selected--songlist">
             <ul>
+                <% const mainAlbumIndex = 3; %>
+                <% const mainSongList = JSON.parse(allSongLists[mainAlbumIndex]); %>
+                <% mainSongList.sort((element1, element2) => element1.song_order - element2.song_order); %>
+                <% for (nextSong of mainSongList) { %>
                 <li class="songlist__individual">
-                    <div class="album__track--number">
-                        <span>1</span>
+                    <div>
+                        <div class="album__track--number">
+                            <span><%= nextSong.song_order %></span>
+                        </div>
+                        <img class="song__favorite--select" src="/img/favorite-star.svg" alt="Favorites">
+                        <p class="album__song--name"><%= nextSong.song_name.toUpperCase() %></p>
+                        <% if (nextSong.song_label.length > 0) { %>
+                        <div class="album__song--categories">
+                            <% if (nextSong.song_label.includes('explicit')) { %>
+                            <span>EXPLICIT</span>
+                            <% } %>
+                            <% if (nextSong.song_label.includes('upbeat')) { %>
+                            <span>UPBEAT</span>
+                            <% } %>
+                        </div>
+                        <% } %>
                     </div>
-                    <img class="song__favorite--select" src="/img/favorite-star.svg" alt="Favorites">
-                    <p class="album__song--name">Song Name</p>
-                    <div class="album__song--categories">
-                        <span>Category 1</span>
-                        <span>Category 2</span>
-                    </div>
-                    <p class="album__song--time">1:00</p>
+                    <p class="album__song--time"><%= nextSong.song_duration %></p>
                 </li>
-                <li class="songlist__individual">2. * Hello Explicit 1:00</li>
-                <li class="songlist__individual">3. * Hello Explicit 1:00</li>
-                <li class="songlist__individual">4. * Hello Explicit 1:00</li>
-                <li class="songlist__individual">5. * Hello Explicit 1:00</li>
+                <% } %>
             </ul>
         </div>
-        <div class="album__select--arrows album__select--arrows-right">
-            <img src="/img/arrow.svg" alt="Right Arrow">
-        </div>
-    </section> -->
+    </section>
     <script src="/js/index.js"></script>
 </body>
 </html>
