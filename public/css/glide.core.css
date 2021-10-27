@@ -1,8 +1,9 @@
 .glide {
   position: relative;
   width: 95%;
-  height: 24.5rem;
-  box-sizing: border-box; }
+  height: 27.5rem;
+  box-sizing: border-box;
+  overflow-x: clip;}
   .glide * {
     box-sizing: inherit; }
   .glide__track {

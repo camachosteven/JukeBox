@@ -14,56 +14,85 @@
 
 </head>
 <body>
-    <h1 class="project__title">Haku Sports JukeBox</h1>
+    <h1 class="project__title">Haku Sports JukeBox</h1> 
     
+    <% const classes = ['albums__individual-main', 'albums__individual-right-of-main', 'albums__individual-right-end', 'albums__individual-left-end', 'albums__individual-left-of-main']; %>
     <div class="glide">
         <div class="glide__track" data-glide-el="track">
             <div class="glide__slides albums__visual">
-                <div class="glide__slide albums__individual albums__individual-main"
-                    data-albumID="1">
-                    <img src="/img/sample-album.png" alt="sample-album">
-                    <p class="album__name">IT IS TOO LATE</p>
-                    <p class="artist__name">DRAKE</p>                    
+                <% for (let i = 0; i < allAlbums.length; i++) { %>
+                <div class="glide__slide albums__individual <%= classes[i] %>" 
+                data-albumID="<%= allAlbums[i].id %>" data-songs="<%= allSongLists[i] %>">
+                <img src="<%= allAlbums[i].cover_photo_url %>" alt="<%= allAlbums[i].name %>">
+                <p class="album__name"><%= allAlbums[i].name.toUpperCase() %></p>
+                <p class="artist__name"><%= allAlbums[i].artist_name.toUpperCase() %></p>                    
                 </div>
-                <div class="glide__slide albums__individual albums__individual-right-of-main"
-                    data-albumID="2">
-                    <img src="/img/sample-album2.jpg" alt="sample-album">
-                    <p class="album__name">IT IS TOO LATE2</p>
-                    <p class="artist__name">DRAKE</p>                    
-                </div>
-                <div class="glide__slide albums__individual albums__individual-right-end"
-                    data-albumID="3">
-                    <img src="/img/sample-album3.jpg" alt="sample-album">
-            
-                    <p class="album__name">IT IS TOO LATE3</p>
-                    <p class="artist__name">DRAKE</p>
-                </div>
-                <div class="glide__slide albums__individual albums__individual-left-end"
-                    data-albumID="4">
-                    <img src="/img/sample-album4.jpg" alt="sample-album">
-            
-                    <p class="album__name">IT IS TOO LATE4</p>
-                    <p class="artist__name">DRAKE</p>
-                </div>
-                <div class="glide__slide albums__individual albums__individual-left-of-main"
-                    data-albumID="5">
-                    <img src="/img/sample-album5.jpg" alt="sample-album">
-                    <p class="album__name">IT IS TOO LATE5</p>
-                    <p class="artist__name">DRAKE</p>                    
-                </div>
+                <% } %>
             </ul>
         </div>
         <div class="glide__arrows" data-glide-el="controls">
             <button class="glide__arrow glide__arrow--left previous__arrow" data-glide-dir="<">
-                <img src="/img/arrow-left.svg" alt="Left">
+                <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                	 width="30px" height="30px" min-height="60px" viewBox="0 0 401.949 401.949" style="enable-background:new 0 0 401.949 401.949;"
+                	 xml:space="preserve" fill="#cccccc">
+                    <g id="Layer_5_54_">
+                        <path d="M401.947,159.301c0-8.583-6.949-15.742-15.497-15.889l0,0H197.515c-7.021-1.589-12.309-7.886-12.309-15.369V78.976
+                            c0-8.675-5.397-11.163-11.993-5.535L4.948,190.735c-6.598,5.634-6.598,14.847,0,20.479l168.262,117.29
+                            c6.599,5.632,11.996,3.146,11.996-5.528v-49.067c0-8.673,7.097-15.771,15.771-15.771l185.201-0.276
+                            c8.676-0.004,15.771-7.101,15.771-15.771L401.947,159.301z"/>
+                    </g>
+                </svg>
             </button>
             <button class="glide__arrow glide__arrow--right next__arrow" data-glide-dir=">">
-                <img src="/img/arrow-right.svg" alt="right">
+                <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                	 width="30px" height="30px" min-height="60px" viewBox="0 0 401.949 401.949" transform="rotate(180)" style="enable-background:new 0 0 401.949 401.949;"
+                	 xml:space="preserve" fill="#cccccc">
+                		<g id="Layer_5_54_">
+                			<path d="M401.947,159.301c0-8.583-6.949-15.742-15.497-15.889l0,0H197.515c-7.021-1.589-12.309-7.886-12.309-15.369V78.976
+                				c0-8.675-5.397-11.163-11.993-5.535L4.948,190.735c-6.598,5.634-6.598,14.847,0,20.479l168.262,117.29
+                				c6.599,5.632,11.996,3.146,11.996-5.528v-49.067c0-8.673,7.097-15.771,15.771-15.771l185.201-0.276
+                				c8.676-0.004,15.771-7.101,15.771-15.771L401.947,159.301z"/>
+                		</g>
+                </svg>
             </button>
         </div>
     </div>
     
-    <script src="/js/glide.js"></script>
+    <section class="lower-body__container">
+        <div class="album__selected--songlist">
+            <ul>
+                <% const mainAlbumIndex = 0; %>
+                <% const mainSongList = JSON.parse(allSongLists[mainAlbumIndex]); %>
+                <% for (nextSong of mainSongList) { %>
+                <li class="songlist__individual" data-songID="<%= nextSong.id %>>">
+                    <div>
+                        <div class="album__track--number">
+                            <span><%= nextSong.song_order %></span>
+                        </div>
+                        <img class="song__favorite--select" src="/img/favorite-star.svg" alt="Favorites">
+                        <p class="song__favorite--popup">MARK AS FAVORITE</p>
+                        <p class="album__song--name"><%= nextSong.song_name.toUpperCase() %></p>
+                        <% if (nextSong['song_label'] != null) { %>
+                        <% if (nextSong.song_label.length > 0) { %>
+                        <div class="album__song--categories">
+                            <% if (nextSong.song_label.includes('explicit')) { %>
+                            <span>EXPLICIT</span>
+                            <% } %>
+                            <% if (nextSong.song_label.includes('upbeat')) { %>
+                            <span>UPBEAT</span>
+                            <% } %>
+                        </div>
+                        <% } %>
+                        <% } %>
+                    </div>
+                    <p class="album__song--time"><%= nextSong.song_duration %></p>
+                </li>
+                <% } %>
+            </ul>
+        </div>
+    </section>
+
+    <script src="/js/glide.min.js"></script>
     <script>
         new Glide('.glide', {
             type: 'carousel',

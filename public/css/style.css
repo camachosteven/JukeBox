@@ -16,27 +16,30 @@ Albums carousel
 
 .albums__individual {
     box-shadow: 2px 2px 5px 2px #dddddd;
-    padding: 1rem 2rem;
+    padding: 1.5rem 2rem;
     background: white;
-    height: 18.5rem;
+    height: 21.5rem;
+    width: auto;
 }
 
 .albums__individual img {
     display: block;
-    height: 100px;
-    width: 100px;
+    height: 150px;
+    width: 150px;
     margin: 0 auto;
 }
 
 .albums__individual .album__name {
     font-size: 1.5rem;
     color: #00698C;
+    margin-bottom: 0.5rem;
     text-align: center;
 }
 
 .albums__individual .artist__name {
     font-size: 1.5rem;
     text-align: center;
+    margin: 0;
     color: black;
 }
 
@@ -81,39 +84,33 @@ Albums carousel
     transition: color 0.5s;
 }
 
-/* .albums__individual-1 {
-    position: relative;
-    z-index: 0;
-    left: 10rem;
+.previous__arrow--hover svg,
+.next__arrow--hover svg {
+    fill: white;
 }
 
-.albums__individual-2 {
-    position: relative;
-    z-index: 5;
-    top: 3rem;
-    left: 5rem;
+.previous__arrow--hover,
+.next__arrow--hover {
+    background-color: #0085B2;
+    border-color: #0085B2;
 }
 
-.albums__individual-4 {
-    position: relative;
-    z-index: 5;
-    top: 3rem;
-    right: 5rem;
+.previous__arrow--down,
+.next__arrow--down {
+    background-color: #00698C;
+    border-color: #00698C;
 }
 
-.albums__individual-5 {
-    position: relative;
-    z-index: 0;
-    right: 10rem;
-} */
-
-
+.previous__arrow--down svg
+.next__arrow--down svg {
+    fill: #00698C;
+}
 
 /* Songlist */ 
 .lower-body__container {
     display: flex;
     justify-content: center;
-    padding: 0 1rem;
+    padding: 0 1rem 2rem;
     margin-top: 6rem;
 }
 
