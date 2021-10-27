@@ -5,12 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Haku Sports JukeBox</title>
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/glide.core.min.css">
+    <link rel="stylesheet" href="/css/glide.core.css">
     <link rel="stylesheet" href="/css/glide.theme.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
 
 </head>
 <body>
@@ -19,53 +19,61 @@
     <div class="glide">
         <div class="glide__track" data-glide-el="track">
             <div class="glide__slides albums__visual">
-                <div class="glide__slide albums__individual albums__individual-1">
+                <div class="glide__slide albums__individual albums__individual-main"
+                    data-albumID="1">
                     <img src="/img/sample-album.png" alt="sample-album">
                     <p class="album__name">IT IS TOO LATE</p>
                     <p class="artist__name">DRAKE</p>                    
                 </div>
-                <div class="glide__slide albums__individual albums__individual-2">
+                <div class="glide__slide albums__individual albums__individual-right-of-main"
+                    data-albumID="2">
                     <img src="/img/sample-album2.jpg" alt="sample-album">
-                    <p class="album__name">IT IS TOO LATE</p>
+                    <p class="album__name">IT IS TOO LATE2</p>
                     <p class="artist__name">DRAKE</p>                    
                 </div>
-                <div class="glide__slide albums__individual albums__individual-3">
+                <div class="glide__slide albums__individual albums__individual-right-end"
+                    data-albumID="3">
                     <img src="/img/sample-album3.jpg" alt="sample-album">
             
-                    <p class="album__name">IT IS TOO LATE</p>
+                    <p class="album__name">IT IS TOO LATE3</p>
                     <p class="artist__name">DRAKE</p>
                 </div>
-                <div class="glide__slide albums__individual albums__individual-4">
+                <div class="glide__slide albums__individual albums__individual-left-end"
+                    data-albumID="4">
                     <img src="/img/sample-album4.jpg" alt="sample-album">
             
-                    <p class="album__name">IT IS TOO LATE</p>
+                    <p class="album__name">IT IS TOO LATE4</p>
                     <p class="artist__name">DRAKE</p>
                 </div>
-                <div class="glide__slide albums__individual albums__individual-5">
+                <div class="glide__slide albums__individual albums__individual-left-of-main"
+                    data-albumID="5">
                     <img src="/img/sample-album5.jpg" alt="sample-album">
-                    <p class="album__name">IT IS TOO LATE</p>
+                    <p class="album__name">IT IS TOO LATE5</p>
                     <p class="artist__name">DRAKE</p>                    
                 </div>
             </ul>
         </div>
         <div class="glide__arrows" data-glide-el="controls">
-            <button class="glide__arrow glide__arrow--left" data-glide-dir="<">
+            <button class="glide__arrow glide__arrow--left previous__arrow" data-glide-dir="<">
                 <img src="/img/arrow-left.svg" alt="Left">
             </button>
-            <button class="glide__arrow glide__arrow--right" data-glide-dir=">">
+            <button class="glide__arrow glide__arrow--right next__arrow" data-glide-dir=">">
                 <img src="/img/arrow-right.svg" alt="right">
             </button>
         </div>
     </div>
     
-    <script src="/js/glide.min.js"></script>
+    <script src="/js/glide.js"></script>
     <script>
         new Glide('.glide', {
             type: 'carousel',
             startAt: 0,
             perView: 5,
-            focusAt: 'center'
+            focusAt: 'center',
+            peek: 0,
+            dragThreshold: false
         }).mount();
     </script>
+    <script src="/js/index.js"></script>
 </body>
 </html>

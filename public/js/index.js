@@ -2,22 +2,89 @@ const allSongLists = [];
 const allAlbums = [];
 const state = {};
 
-// /** Obtain songs from each album, delete dataset from each tag */
-// window.addEventListener('DOMContentLoaded', event => {
-//     const albums = Array.from(document.querySelectorAll('.albums__individual'));
-//     for (album of albums) {
-//         allAlbums.push({
-//             cover_photo_url: album.querySelector('img').src,
-//             id: parseInt(album.dataset.albumid),
-//             artist_name: album.querySelector('.artist__name').textContent,
-//             album_name: album.querySelector('.album__name').textContent
-//         });
-//         const songs = JSON.parse(album.dataset.songs);
-//         allSongLists.push(songs);
-//         delete album.dataset.songs;
-//     }
-//     state.currentAlbumIndex = 2;
-// });
+/** Obtain songs from each album, delete dataset from each tag */
+window.addEventListener('DOMContentLoaded', event => {
+    const albums = Array.from(document.querySelectorAll('.albums__individual'));
+    const noDuplicateAlbums = albums.slice(5, albums.length / 3);
+    for (album of noDuplicateAlbums) {
+        allAlbums.push(album);
+        // const songs = JSON.parse(album.dataset.songs);
+        // allSongLists.push(songs);
+        // delete album.dataset.songs;
+    }
+    state.currentAlbumIndex = 0;
+    state.initialGlideIndex = 5;
+    state.finalGlideIndex = 9;
+});
+
+const previousArrow = document.querySelector('.previous__arrow');
+const nextArrow = document.querySelector('.next__arrow');
+
+const classes = [
+    "albums__individual-main",
+    "albums__individual-right-of-main",
+    "albums__individual-right-end",
+    "albums__individual-left-end",
+    "albums__individual-left-of-main"
+];
+
+previousArrow.addEventListener('click', event => {
+    const allAlbumClones = Array.from(document.querySelectorAll('.albums__individual'));
+    console.log(allAlbumClones);
+    const glideActiveIndex = allAlbumClones.findIndex(album => {
+        const classesAsArray = Array.from(album.classList);
+        return classesAsArray.find(className => className === 'glide__slide--active');
+    });
+    if (state.glideActiveIndex !== glideActiveIndex) {
+        state.glideActiveIndex = glideActiveIndex; 
+        for (let i = 0; i < allAlbumClones.length; i++) {
+            const classesAsArray = Array.from(allAlbumClones[i].classList);
+            const oldClass = classesAsArray.find(className => {
+                const endRegex = new RegExp(/end$/);
+                const mainRegex = new RegExp(/main$/);
+                return endRegex.test(className) || mainRegex.test(className)
+            });
+            const newClass = classes.find((className, index) => {
+                if (index === 0) {
+                    return classes[classes.length - 1] === oldClass
+                } else {
+                    return classes[index - 1] === oldClass
+                }
+            });
+            allAlbumClones[i].classList.remove(oldClass);
+            allAlbumClones[i].classList.add(newClass);
+        }
+    }
+});
+
+nextArrow.addEventListener('click', event => {
+    const allAlbumClones = Array.from(document.querySelectorAll('.albums__individual'));
+    const glideActiveIndex = allAlbumClones.findIndex(album => {
+        const classesAsArray = Array.from(album.classList);
+        return classesAsArray.find(className => className === 'glide__slide--active');
+    });
+    if (state.glideActiveIndex !== glideActiveIndex) {
+        state.glideActiveIndex = glideActiveIndex; 
+        for (let i = 0; i < allAlbumClones.length; i++) {
+            const classesAsArray = Array.from(allAlbumClones[i].classList);
+            const oldClass = classesAsArray.find(className => {
+                const endRegex = new RegExp(/end$/);
+                const mainRegex = new RegExp(/main$/);
+                return endRegex.test(className) || mainRegex.test(className)
+            });
+            const newClass = classes.find((className, index) => {
+                if (index === classes.length - 1) {
+                    return classes[0] === oldClass
+                } else {
+                    return classes[index + 1] === oldClass
+                }
+            });
+            allAlbumClones[i].classList.remove(oldClass);
+            allAlbumClones[i].classList.add(newClass);
+            console.log(allAlbumClones[i]);
+        }
+    }
+});
 
 // // hover effects
 // const songs = Array.from(document.querySelectorAll('.songlist__individual'));

@@ -12,18 +12,20 @@ Albums carousel
 .albums__visual {
     display: flex;
     justify-content: space-evenly;
-    position: relative;
 }
 
 .albums__individual {
     box-shadow: 2px 2px 5px 2px #dddddd;
     padding: 1rem 2rem;
     background: white;
+    height: 18.5rem;
 }
 
 .albums__individual img {
-    height: 200px;
-    width: 200px;
+    display: block;
+    height: 100px;
+    width: 100px;
+    margin: 0 auto;
 }
 
 .albums__individual .album__name {
@@ -35,6 +37,48 @@ Albums carousel
 .albums__individual .artist__name {
     font-size: 1.5rem;
     text-align: center;
+    color: black;
+}
+
+
+.albums__individual.albums__individual-main {
+    position: relative;
+    z-index: 10;
+    transform: translate(0, 6rem);
+    background-color: #0085B2;
+    box-shadow: none;
+    transition-property: background-color, box-shadow, color, translate;
+    transition-duration: 0.5s;
+}
+
+.albums__individual-right-of-main {
+    position: relative;
+    z-index: 5;
+    transform: translate(-5rem, 3rem);
+    transition: translate 0.5s;
+}
+
+.albums__individual-left-of-main {
+    position: relative;
+    z-index: 5;
+    transform: translate(5rem, 3rem);
+    transition: translate 0.5s, box-shadow 0.5s;
+}
+
+.albums__individual-left-end {
+    transform: translate(10rem, 0);
+    transition: translate 0.5s;
+}
+
+.albums__individual-right-end {
+    transform: translate(-10rem, 0);
+    transition: translate 0.5s;
+}
+
+.albums__individual-main .album__name,
+.albums__individual-main .artist__name {
+    color: white;
+    transition: color 0.5s;
 }
 
 /* .albums__individual-1 {
@@ -50,14 +94,6 @@ Albums carousel
     left: 5rem;
 }
 
-.albums__individual-3 {
-    position: relative;
-    z-index: 10;
-    top: 6rem;
-    background-color: #0085B2;
-    box-shadow: none;
-}
-
 .albums__individual-4 {
     position: relative;
     z-index: 5;
@@ -69,11 +105,6 @@ Albums carousel
     position: relative;
     z-index: 0;
     right: 10rem;
-} */
-/* 
-.albums__individual-3 .album__name,
-.albums__individual-3 .artist__name {
-    color: white;
 } */
 
 
