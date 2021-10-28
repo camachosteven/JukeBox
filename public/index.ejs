@@ -5,17 +5,28 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Haku Sports JukeBox</title>
+
+    <!-- Glidejs css files: Since they were shockingly small, I also changed a few values
+        for the perfect fit for the carousel. -->
     <link rel="stylesheet" href="/css/glide.core.css">
     <link rel="stylesheet" href="/css/glide.theme.css">
+
+    <!-- Google Fonts (Roboto) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="/css/style.css">
 
 </head>
 <body>
     <h1 class="project__title">Haku Sports JukeBox</h1> 
-    
+    <!-- 
+        The glide div contains the code for the carousel to be made using the Glidejs
+        library. Each slide is an album displayed like in the jukebox-ui block and dynamically
+        is added all album data, along with the corresponding classes. The buttons for the
+        carousel were customized to contain svgs of arrows with a border. 
+     -->
     <% const classes = ['albums__individual-main', 'albums__individual-right-of-main', 'albums__individual-right-end', 'albums__individual-left-end', 'albums__individual-left-of-main']; %>
     <div class="glide">
         <div class="glide__track" data-glide-el="track">
@@ -28,7 +39,7 @@
                 <p class="artist__name"><%= allAlbums[i].artist_name.toUpperCase() %></p>                    
                 </div>
                 <% } %>
-            </ul>
+            </div>
         </div>
         <div class="glide__arrows" data-glide-el="controls">
             <button class="glide__arrow glide__arrow--left previous__arrow" data-glide-dir="<">
@@ -57,14 +68,18 @@
             </button>
         </div>
     </div>
-    
     <section class="lower-body__container">
-        <div class="album__selected--songlist">
+        <% for (let i = 0; i < allAlbums.length; i++) { %>
+        <% if (i === 0) { %>
+        <div class="collapse__content album__selected--songlist">
+        <% } else { %>
+        <div class="collapse__content">
+        <% } %>
             <ul>
-                <% const mainAlbumIndex = 0; %>
-                <% const mainSongList = JSON.parse(allSongLists[mainAlbumIndex]); %>
-                <% for (nextSong of mainSongList) { %>
-                <li class="songlist__individual" data-songID="<%= nextSong.id %>>">
+                <% const currentAlbumIndex = i; %>
+                <% const currentSongList = JSON.parse(allSongLists[currentAlbumIndex]); %>
+                <% for (nextSong of currentSongList) { %>
+                <li class="songlist__individual" data-songID="<%= nextSong.id %>">
                     <div>
                         <div class="album__track--number">
                             <span><%= nextSong.song_order %></span>
@@ -90,9 +105,13 @@
                 <% } %>
             </ul>
         </div>
+        <% } %>
     </section>
 
-    <script src="/js/glide.min.js"></script>
+    <!-- Glidejs js file minified -->
+    <script src="/js/glide.js"></script>
+
+    <!-- initializing the glide carousel -->
     <script>
         new Glide('.glide', {
             type: 'carousel',
@@ -103,6 +122,9 @@
             dragThreshold: false
         }).mount();
     </script>
-    <script src="/js/index.js"></script>
+
+    <script src="/js/start.js"></script>
+    <script src="/js/carousel.js"></script>
+    <script src="/js/songlist.js"></script>
 </body>
 </html>

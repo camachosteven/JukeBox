@@ -6,9 +6,7 @@
     text-align: center;
 }
 
-/*
-Albums carousel
-*/
+/* Albums carousel */
 .albums__visual {
     display: flex;
     justify-content: space-evenly;
@@ -84,6 +82,7 @@ Albums carousel
     transition: color 0.5s;
 }
 
+/* Album arrows */
 .previous__arrow--hover svg,
 .next__arrow--hover svg {
     fill: white;
@@ -108,19 +107,27 @@ Albums carousel
 
 /* Songlist */ 
 .lower-body__container {
-    display: flex;
-    justify-content: center;
+    width: 75%;
+    margin: 0 auto;
     padding: 0 1rem 2rem;
-    margin-top: 6rem;
+}
+
+.collapse__content {
+    overflow: hidden;
+    max-height: 0px;
+    transition: max-height 1s;
 }
 
 .album__selected--songlist {
+    overflow: visible;
+    max-height: none;
     flex-grow: 0.5;
     list-style: none;
     box-shadow: 0 0 10px 3px #dddddd;
 }
 
-.album__selected--songlist ul {
+.album__selected--songlist ul,
+.collapse__content ul {
     padding: 0;
     margin: 0;
 }
@@ -162,6 +169,7 @@ Albums carousel
     border-radius: 0.1rem;
 }
 
+/* favorite star design */
 .song__favorite--popup {
     height: 0;
     opacity: 0;
@@ -208,10 +216,12 @@ Albums carousel
     filter: invert(99%) sepia(0%) saturate(0%) hue-rotate(84deg) brightness(107%) contrast(101%);
 }
 
+/* Song name */
 .album__song--name-hover {
     color: white;
 }
 
+/* Song categories */
 .album__song--categories span {
     display: inline-block;
     padding: 0.5rem 1.5rem;
@@ -227,6 +237,7 @@ Albums carousel
     background-color: #90B9C9;
 }
 
+/* song duration */
 .album__song--time {
     color: black;
     position: relative;

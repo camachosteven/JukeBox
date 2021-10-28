@@ -4,9 +4,8 @@ const axios = require('axios');
 /**
  * This route calls the Albums API and Songs API.
  * If the Album API call returns successfully, then it calls the Songs API 
- * for each album concurrently. Using Promise.all it returns all responses from the calls
- * in the order they were sent. Once all responses are received, they are stringified and
- * stored in the APIData object to be passed as context to the template. 
+ * for each album concurrently. Once all responses are received, they are stored in the 
+ * APIData object to be passed as context to the template. 
  * If the Album API call or any of the Songs API calls return unsuccessfully, the app will
  * simply return sample data. 
  */
@@ -17,11 +16,19 @@ router.get('/', (req, res) => {
         url: 'https://stg-resque.hakuapp.com/albums.json'
     })
     .then(allAlbumsResponse => {
+        
+        // shuffle albums for a different order every time
         APIData.allAlbums = shuffleAlbums(allAlbumsResponse.data);
         return Promise.all(APIData.allAlbums.map(element => getSongs(element.id)));
+ 
     })
     .then(allSongListResponses => {
         const allSongLists = [];
+
+        /**
+         * For every songlist, you must sort the songs by song order.
+         * Store them as a JSON string.
+         */
         for (songListResponse of allSongListResponses) {
             const sortedSonglist = songListResponse.data.sort((song1, song2) => {
                 return song1.song_order - song2.song_order;
@@ -30,13 +37,25 @@ router.get('/', (req, res) => {
         }
         APIData.allSongLists = allSongLists;
         res.render('index', APIData);
+
     })
     .catch(error => {
-        console.log(error);
+        
+        /**
+         * return sample data for app to continue functionality
+         * in case API calls failed for whatever reason
+         */
+
         res.render('index', returnSampleData());
+
     });
 });
 
+/**
+ * This method shuffles the albums in random order.
+ * @param {Object[]} albums 
+ * @returns {Object[]} albums in random order
+ */
 const shuffleAlbums = albums => {
     for (let i = 0; i < albums.length; i++) {
         let randomNumber = Math.floor(Math.random() * albums.length);
@@ -47,10 +66,11 @@ const shuffleAlbums = albums => {
     return albums
 };
 
+
 /**
- * This method is used by the array.map function.
- * It takes in an id, returns a promise of the API call containing that
- * album id's song list. 
+ * This method is used by the array.map function to make concurrent calls to Song API
+ * @param {Number} albumID id of album desired
+ * @returns {Promise} a Promise containing the response of that API call using axios
  */
 const getSongs = albumID => {
     return axios({
@@ -60,8 +80,8 @@ const getSongs = albumID => {
 };
 
 /** 
- * This method return sample data for the route to pass to the template in case
- * any of the API calls return unsuccessfully. 
+ * This method simply constructs sample data for the app to use in case 
+ * of an API call failure.  
 */
 const returnSampleData = () => {
     return {

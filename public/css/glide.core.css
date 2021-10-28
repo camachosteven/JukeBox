@@ -3,7 +3,8 @@
   width: 95%;
   height: 27.5rem;
   box-sizing: border-box;
-  overflow-x: clip;}
+  overflow-x: clip;
+  margin: 0 auto}
   .glide * {
     box-sizing: inherit; }
   .glide__track {
