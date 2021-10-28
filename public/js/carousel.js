@@ -81,6 +81,12 @@ const changeAlbumSongList = (transitionType) => {
             allAlbumClones[i].classList.add(newClass);
         }
 
+        /**
+         * This next block of code expands and collapses the song lists. 
+         * Find the visible position
+         * Make it hidden
+         * Move to the next songlist
+         */
         let songListsContainers = Array.from(document.querySelectorAll('.lower-body__container > .collapse__content'));
         const activePosition = 0;
         const visibleElement = songListsContainers[activePosition];
@@ -107,12 +113,17 @@ const changeAlbumSongList = (transitionType) => {
         songListsContainers = Array.from(document.querySelectorAll('.lower-body__container > .collapse__content'));
         songListsContainers[activePosition].style.maxHeight = songListsContainers[activePosition].scrollHeight + 'px';  
         
+        /** 
+         * even after the active slide class was removed, style of maxHeight must removed 
+         * or else it wont be hidden
+         */
         if (transitionType == 'previous') {
             songListsContainers[activePosition + 1].removeAttribute('style');
         } else if (transitionType === 'next') {
             songListsContainers[songListsContainers.length - 1].removeAttribute('style');
         }
 
+        // add eventlisteners to the new songlist to handle hover effects
         addSongHoverEffects();
     }
 };

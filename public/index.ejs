@@ -68,6 +68,12 @@
             </button>
         </div>
     </div>
+
+    <!-- 
+        This block displays the songs as listed in the context variable allSongLists
+        Before any processing, the string must be loaded as a JSON object. For each
+        songlist array, list the songs where they were already sorted by the server. 
+     -->
     <section class="lower-body__container">
         <% for (let i = 0; i < allAlbums.length; i++) { %>
         <% if (i === 0) { %>
@@ -119,10 +125,12 @@
             perView: 5,
             focusAt: 'center',
             peek: 0,
-            dragThreshold: false
+            dragThreshold: false,
+            swipeThreshold: false
         }).mount();
     </script>
 
+    <!-- Personal JS files -->
     <script src="/js/start.js"></script>
     <script src="/js/carousel.js"></script>
     <script src="/js/songlist.js"></script>

@@ -7,6 +7,7 @@ addSongHoverEffects();
 
 function addSongHoverEffects() {
     const songlist = document.querySelector('.collapse__content ul');
+
     songlist.addEventListener('mouseover', event => {
         const element = event.target;
         if (element.closest('.songlist__individual')) {
@@ -18,7 +19,10 @@ function addSongHoverEffects() {
             if (element.closest('.song__favorite--select')) {
                 element.parentNode.querySelector('.song__favorite--popup').classList.add('song__favorite--popup-hover');
             }
+
             const song = element.closest('.songlist__individual');
+
+            /** add classes for the individual song element as well as the respective classes for it children */
             song.classList.add('songlist__individual--hover');
             song.querySelector('.album__song--name').classList.add('album__song--name-hover');
             song.querySelector('.song__favorite--select').classList.add('song__favorite--select-hover');
@@ -30,6 +34,10 @@ function addSongHoverEffects() {
     
     songlist.addEventListener('mouseout', event => {
         const element = event.target;
+
+        /**
+        * if the element.closest is the favorite star image, remove the popup
+        */
         if (element.closest('.songlist__individual')) {
             if (element.closest('.song__favorite--select')) {
                 element.parentNode.querySelector('.song__favorite--popup').classList.remove('song__favorite--popup-hover');
@@ -48,14 +56,6 @@ function addSongHoverEffects() {
         const star = event.target;
         if (star.closest('.song__favorite--select')) {
             star.classList.toggle('song__favorite--selected');
-            // persist data in localstorage or backend db
-            // let trackNumber = star.parentNode.querySelector('.album__track--number span');
-            // trackNumber = parseInt(trackNumber.textContent);
-            // const matchingSong = allSongLists[state.currentAlbumIndex].find(song => {
-            //     return song.song_order === trackNumber;
-            // }); 
         }
     });
 };
-
-// const favoriteStars = Array.from(document.querySelectorAll('.song__favorite--select'));
