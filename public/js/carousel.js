@@ -17,65 +17,7 @@ const classes = [
  * e.g. albums__individual-main.
  * 3. Also change the song list to match the active album. 
  */
-previousArrow.addEventListener('click', event => {
-
-    /**
-     * Glidejs takes the slide elements and takes clones of them for a total of three.
-     * To ensure that the custom functionality works, the classes for all of these elements
-     * must be changed. 
-     */
-    const allAlbumClones = Array.from(document.querySelectorAll('.albums__individual'));
-    const glideActiveIndex = allAlbumClones.findIndex(album => {
-        const classesAsArray = Array.from(album.classList);
-        return classesAsArray.find(className => className === 'glide__slide--active');
-    });
-
-    /**
-     * For some reason, Glidejs will not change the slide once in a while whenever you click
-     * the previous arrow. To ensure custom functionality, change classes only when active
-     * slide changes from current slide. 
-     */
-    if (state.glideActiveIndex !== glideActiveIndex) {
-        state.glideActiveIndex = glideActiveIndex; 
-
-        /**
-         * For each album clone element:
-         * 1. Get classlist
-         * 2. find what design class (listed in classes[]) the element contains
-         * 3. determine its next class
-         * 4. replace classes
-         */
-        for (let i = 0; i < allAlbumClones.length; i++) {
-            const classesAsArray = Array.from(allAlbumClones[i].classList);
-            const oldClass = classesAsArray.find(className => {
-                const endRegex = new RegExp(/end$/);
-                const mainRegex = new RegExp(/main$/);
-                return endRegex.test(className) || mainRegex.test(className)
-            });
-            const newClass = classes.find((className, index) => {
-                if (index === 0) {
-                    return classes[classes.length - 1] === oldClass
-                } else {
-                    return classes[index - 1] === oldClass
-                }
-            });
-            allAlbumClones[i].classList.remove(oldClass);
-            allAlbumClones[i].classList.add(newClass);
-        }
-        
-        let songListsContainers = Array.from(document.querySelectorAll('.lower-body__container > .collapse__content'));
-        const activePosition = 0;
-        songListsContainers[activePosition].classList.remove('album__selected--songlist');
-
-        const [lastElement] = songListsContainers.splice(-1, 1);
-        lastElement.classList.add('album__selected--songlist');
-        const parent = lastElement.parentNode;
-        parent.removeChild(lastElement);
-        parent.insertAdjacentHTML('afterbegin', lastElement.outerHTML);
-
-        //songListsContainers[activePosition].style.maxHeight = songListsContainers[activePosition].scrollHeight + 'px';       
-    }
-});
+previousArrow.addEventListener('click', () => changeAlbumSongList('previous'));
 
 /**
  * This is event listener perform multiple tasks. 
@@ -84,13 +26,9 @@ previousArrow.addEventListener('click', event => {
  * e.g. albums__individual-main.
  * 3. Also change the song list to match the active album. 
  */
-nextArrow.addEventListener('click', () => {
+nextArrow.addEventListener('click', () => changeAlbumSongList('next'));
 
-    /**
-     * Glidejs takes the slide elements and takes clones of them for a total of three.
-     * To ensure that the custom functionality works, the classes for all of these elements
-     * must be changed. 
-     */
+const changeAlbumSongList = (transitionType) => {
     const allAlbumClones = Array.from(document.querySelectorAll('.albums__individual'));
     const glideActiveIndex = allAlbumClones.findIndex(album => {
         const classesAsArray = Array.from(album.classList);
@@ -120,27 +58,62 @@ nextArrow.addEventListener('click', () => {
                 const mainRegex = new RegExp(/main$/);
                 return endRegex.test(className) || mainRegex.test(className)
             });
-            const newClass = classes.find((className, index) => {
-                if (index === classes.length - 1) {
-                    return classes[0] === oldClass
-                } else {
-                    return classes[index + 1] === oldClass
-                }
-            });
+            let newClass;
+            if (transitionType === 'previous') {
+                newClass = classes.find((className, index) => {
+                    if (index === 0) {
+                        return classes[classes.length - 1] === oldClass
+                    } else {
+                        return classes[index - 1] === oldClass
+                    }
+                });
+            } else if (transitionType === 'next') {
+                newClass = classes.find((className, index) => {
+                    if (index === classes.length - 1) {
+                        return classes[0] === oldClass
+                    } else {
+                        return classes[index + 1] === oldClass
+                    }
+                });
+            }
+
             allAlbumClones[i].classList.remove(oldClass);
             allAlbumClones[i].classList.add(newClass);
         }
 
         let songListsContainers = Array.from(document.querySelectorAll('.lower-body__container > .collapse__content'));
         const activePosition = 0;
-        songListsContainers[activePosition].classList.remove('album__selected--songlist');
-        const [firstElement] = songListsContainers.splice(0, 1);
-        songListsContainers[activePosition].classList.add('album__selected--songlist');
-        const parent = firstElement.parentNode;
-        parent.removeChild(firstElement);
-        parent.insertAdjacentHTML('beforeend', firstElement.outerHTML);
+        const visibleElement = songListsContainers[activePosition];
+        visibleElement.classList.remove('collapse__content--active', 'album__selected--songlist');
+
+        let currentElement;
+        if (transitionType === 'previous') {
+            [currentElement] = songListsContainers.splice(-1, 1);
+            currentElement.classList.add('collapse__content--active');
+        } else if (transitionType === 'next') {
+            [currentElement] = songListsContainers.splice(0, 1);
+            songListsContainers[activePosition].classList.add('collapse__content--active');
+        }
+        
+        
+        const parent = currentElement.parentNode;
+        parent.removeChild(currentElement);
+        if (transitionType == 'previous') {
+            parent.insertAdjacentHTML('afterbegin', currentElement.outerHTML);
+        } else if (transitionType === 'next') {
+            parent.insertAdjacentHTML('beforeend', currentElement.outerHTML);
+        }
+
+        songListsContainers = Array.from(document.querySelectorAll('.lower-body__container > .collapse__content'));
+        songListsContainers[activePosition].style.maxHeight = songListsContainers[activePosition].scrollHeight + 'px';  
+        
+        if (transitionType == 'previous') {
+            songListsContainers[activePosition + 1].removeAttribute('style');
+        } else if (transitionType === 'next') {
+            songListsContainers[songListsContainers.length - 1].removeAttribute('style');
+        }
     }
-});
+};
 
 /** These eventlisteners are for the graphics of the arrows */
 previousArrow.addEventListener('mouseenter', () => {

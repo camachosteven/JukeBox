@@ -71,9 +71,9 @@
     <section class="lower-body__container">
         <% for (let i = 0; i < allAlbums.length; i++) { %>
         <% if (i === 0) { %>
-        <div class="collapse__content album__selected--songlist">
+        <div class="collapse__content collapse__content--active album__selected--songlist" id="<%= allAlbums[i].id %>">
         <% } else { %>
-        <div class="collapse__content">
+        <div class="collapse__content" id="<%= allAlbums[i].id %>">
         <% } %>
             <ul>
                 <% const currentAlbumIndex = i; %>

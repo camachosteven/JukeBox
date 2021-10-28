@@ -18,12 +18,14 @@
     background: white;
     height: 21.5rem;
     width: auto;
+    overflow-wrap: break-word;
 }
 
 .albums__individual img {
     display: block;
-    height: 150px;
-    width: 150px;
+    min-height: 100px;
+    min-width: 100px;
+    width: 100%;
     margin: 0 auto;
 }
 
@@ -114,14 +116,17 @@
 
 .collapse__content {
     overflow: hidden;
-    max-height: 0px;
-    transition: max-height 1s;
+    max-height: 0;
+    transition: max-height 0.5s;
 }
 
 .album__selected--songlist {
     overflow: visible;
     max-height: none;
-    flex-grow: 0.5;
+    list-style: none;
+}
+
+.collapse__content--active {
     list-style: none;
     box-shadow: 0 0 10px 3px #dddddd;
 }
@@ -246,4 +251,14 @@
 
 .album__song--time-hover {
     color: white;
+}
+
+@media screen and (max-width: 965px) {
+    html, body {
+        width: 889px;
+    }
+
+    .lower-body__container {
+        min-width: 712px;
+    }
 }
