@@ -112,6 +112,8 @@ const changeAlbumSongList = (transitionType) => {
         } else if (transitionType === 'next') {
             songListsContainers[songListsContainers.length - 1].removeAttribute('style');
         }
+
+        addSongHoverEffects();
     }
 };
 

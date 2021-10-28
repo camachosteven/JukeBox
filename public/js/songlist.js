@@ -2,8 +2,11 @@
 /**
  * The following eventlisteners handle the hover effect on the individual song blocks. 
  */
-const songlistDivs = Array.from(document.querySelectorAll(('.collapse__content ul')));
-songlistDivs.forEach(songlist => {
+
+addSongHoverEffects();
+
+function addSongHoverEffects() {
+    const songlist = document.querySelector('.collapse__content ul');
     songlist.addEventListener('mouseover', event => {
         const element = event.target;
         if (element.closest('.songlist__individual')) {
@@ -53,7 +56,6 @@ songlistDivs.forEach(songlist => {
             // }); 
         }
     });
-});
-
+};
 
 // const favoriteStars = Array.from(document.querySelectorAll('.song__favorite--select'));
